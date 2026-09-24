@@ -8,8 +8,7 @@ from flask import Flask, current_app, g, jsonify, render_template, request
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Set TRUTHLENS_DB to point at a persistent disk in deployment (e.g. /var/data/truthlens.db)
-DEFAULT_DB = os.environ.get("TRUTHLENS_DB") or os.path.join(BASE_DIR, "data", "truthlens.db")
-
+DEFAULT_DB = "/tmp/truthlens.db"
 PLATFORMS = ["WhatsApp", "X", "Instagram", "Other"]
 CATEGORIES = ["Politics", "Health", "Finance", "Other"]
 STATUSES = ["Unverified", "Verified True", "False", "Misleading"]

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TruthLens – Misinformation Triage Platform</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>TruthLens</h1>
+      <p class="subtitle">Misinformation Triage Platform</p>
+      <p class="tagline">Check information, not ideologies.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel" aria-labelledby="submit-h">
+      <h2 id="submit-h">Submit a Claim</h2>
+      <form id="claim-form" novalidate>
+        <label for="text">Claim Text</label>
+        <textarea id="text" rows="4" maxlength="5000" placeholder="Paste the viral claim here…"></textarea>
+        <div class="row">
+          <div>
+            <label for="platform">Source Platform</label>
+            <select id="platform">
+              {% for p in platforms %}<option>{{ p }}</option>{% endfor %}
+            </select>
+          </div>
+          <div>
+            <label for="category">Category</label>
+            <select id="category">
+              {% for c in categories %}<option>{{ c }}</option>{% endfor %}
+            </select>
+          </div>
+        </div>
+        <label for="source_link">Source Link <span class="muted">(optional)</span></label>
+        <input id="source_link" type="text" maxlength="500" placeholder="https://…">
+        <div class="actions">
+          <button type="submit" class="btn primary">Submit Claim</button>
+          <span id="form-msg" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel" aria-labelledby="feed-h">
+      <div class="feed-head">
+        <h2 id="feed-h">Public Claim Feed</h2>
+        <div class="demo-tools">
+          <button id="demo-load" class="btn small">Load Demo Data</button>
+          <button id="demo-clear" class="btn small danger">Clear All</button>
+        </div>
+      </div>
+      <p class="muted note">Risk flags are automatic triage, not a verdict. <strong>High Risk does not mean False</strong> — it means the claim needs a human reviewer's attention. Unverified claims are shown publicly and clearly labelled.</p>
+      <div class="filters">
+        <div>
+          <label for="filter-category">Category</label>
+          <select id="filter-category">
+            <option>All</option>
+            {% for c in categories %}<option>{{ c }}</option>{% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="filter-status">Status</label>
+          <select id="filter-status">
+            <option>All</option>
+            {% for s in statuses %}<option>{{ s }}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+      <div id="feed" class="feed" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="wrap muted footer">TruthLens · Code2Career AI Hackathon · Track 2</footer>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="detail-h">
+    <div class="modal-box">
+      <button id="modal-close" class="close" aria-label="Close">&times;</button>
+      <h2 id="detail-h">Claim Details</h2>
+      <div id="detail"></div>
+    </div>
+  </div>
+
+  <script>window.TL = { statuses: {{ statuses | tojson }} };</script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

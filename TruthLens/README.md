@@ -14,7 +14,7 @@ Brief: TruthLens – A misinformation triage platform
 
 ## Live Demo
 
-Live Demo: `ADD_YOUR_DEPLOYED_URL_HERE`
+Live Demo: https://truthlens-nine-khaki.vercel.app/
 
 **Test credentials: none needed.** No authentication is implemented because the hackathon brief requires the application to be accessible without login.
 
